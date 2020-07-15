@@ -1,0 +1,401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head> 
+  <meta charset="utf-8">
+ 
+<!-- utf-8 works for most cases --> 
+  <meta name="viewport" content="width=device-width">
+ 
+<!-- Forcing initial-scale shouldn't be necessary --> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+<!-- Use the latest (edge) version of IE rendering engine --> 
+  <meta name="x-apple-disable-message-reformatting">
+ 
+<!-- Disable auto-scale in iOS 10 Mail entirely -->
+  <title>Siemplify</title>
+ 
+ 
+<!-- The title tag shows in email notifications, like Android 4.4. -->                 
+<!-- Web Font / @font-face : BEGIN --> 
+<!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. --> 
+<!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. --> 
+<!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+            }
+        </style>
+    <![endif]--> 
+<!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ --> 
+<!--[if !mso]><!--> 
+  <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,400i,500,600,700" rel="stylesheet">
+ 
+<!--<![endif]--> 
+<!-- Web Font / @font-face : END --> 
+<!-- CSS Reset : BEGIN --> 
+  <style>
+
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+
+        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto;
+        }
+
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+          
+        }
+
+        /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
+        a {
+            text-decoration: none;
+        }
+
+        /* What it does: A work-around for email clients meddling in triggered links. */
+        *[x-apple-data-detectors],  /* iOS */
+        .unstyle-auto-detected-links *,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from changing the text color in conversation threads. */
+        .im {
+            color: inherit !important;
+        }
+
+        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
+        .a6S {
+            display: none !important;
+            opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img + div {
+            display: none !important;
+        }
+
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+
+        /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+            u ~ div .email-container {
+                min-width: 320px !important;
+            }
+        }
+        /* iPhone 6, 6S, 7, 8, and X */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            u ~ div .email-container {
+                min-width: 375px !important;
+            }
+        }
+        /* iPhone 6+, 7+, and 8+ */
+        @media only screen and (min-device-width: 414px) {
+            u ~ div .email-container {
+                min-width: 414px !important;
+            }
+        }
+
+    </style> 
+<!-- CSS Reset : END --> 
+<!-- Reset list spacing because Outlook ignores much of our inline CSS. --> 
+<!--[if mso]>
+	<style type="text/css">
+		ul,
+		ol {
+			margin: 0 !important;
+		}
+		li {
+			margin-left: 30px !important;
+		}
+		li.list-item-first {
+			margin-top: 0 !important;
+		}
+		li.list-item-last {
+			margin-bottom: 10px !important;
+		}
+	</style>
+	<![endif]--> 
+<!-- custom for marketo --> 
+  <style>
+        .float-left {
+            float: left;
+            padding: 0 20px;
+        }
+
+        .float-right {
+            float: right;
+            padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center !important;
+            float: none !important;
+        }
+
+        .link-text a {
+            color: #ffffff;
+            display: inline-block;
+            margin: 15px 0;
+        }
+
+        .social-media-icons {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-media-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .social-media-icons li img {
+            width: 30px;
+        }
+
+        a > div {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style> 
+<!-- custom for marketo : END --> 
+<!-- Progressive Enhancements : BEGIN --> 
+  <style>
+
+	    /* What it does: Hover styles for buttons */
+	    .button-td,
+	    .button-a {
+	        transition: all 100ms ease-in;
+            height: 40px !important;
+            line-height: 40px !important;
+	    }
+	    .button-td-primary:hover,
+	    .button-a-primary:hover {
+	        background: #ee0306 !important;
+	        border-color: #ee0306 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+	    }
+
+	    /* Media Queries */
+	    @media screen and (max-width: 480px) {
+
+	        /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+	        .fluid {
+	            width: 100% !important;
+	            max-width: 100% !important;
+	            height: auto !important;
+	            margin-left: auto !important;
+	            margin-right: auto !important;
+	        }
+
+	        /* What it does: Forces table cells into full-width rows. */
+	        .stack-column,
+	        .stack-column-center {
+	            display: block !important;
+	            width: 100% !important;
+	            max-width: 100% !important;
+	            direction: ltr !important;
+	        }
+	        /* And center justify these ones. */
+	        .stack-column-center {
+	            text-align: center !important;
+	        }
+
+	        /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+	        .center-on-narrow {
+	            text-align: center !important;
+	            display: block !important;
+	            margin-left: auto !important;
+	            margin-right: auto !important;
+	            float: none !important;
+	        }
+	        table.center-on-narrow {
+	            display: inline-block !important;
+	        }
+
+	        /* What it does: Adjust typography on small screens to improve readability */
+	        .email-container p {
+	            font-size: 17px !important;
+	        }
+	    }
+
+    </style> 
+<!-- Progressive Enhancements : END --> 
+<!-- What it does: Makes background images in 72ppi Outlook render at correct size. --> 
+<!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]--> 
+</head><body width="100%" style="margin: 0pt; padding: 0pt ! important; background-color: rgb(235, 235, 235);">
+<center style="width: 100%; background-color: rgb(235, 235, 235);"><!-- [if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ebebeb;">
+    <tr>
+    <td>
+    <![endif]--> <!--
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
+            2. MSO tags for Desktop Windows Outlook enforce a 680px width.
+            Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
+        -->
+<table align="center" border="0" cellpadding="5" cellspacing="5" width="600">
+<tbody>
+<tr>
+<td>
+<div align="center"><span class="styleheader_footer_body">[<span style="font-size: 10pt;"><strong><a href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey=">New Guide</a>]&nbsp;<a href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey=">Remote Security Operations</a></strong></span><br> </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div style="margin: 0pt auto; max-width: 680px;" class="email-container"><!-- [if mso]>
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="680">
+            <tr>
+            <td>
+            <![endif]--> <!-- Email Body : BEGIN -->
+<table class="mktoContainer" id="template-wrapper" role="presentation" style="margin: 0pt auto;" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr class="mktoModule" id="hero_banner_module">
+<td style="background-color: rgb(255, 255, 255);"><a href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey="><img src="http://pages.siemplify.co/rs/182-SXA-457/images/TechnicalGuideToRemote.png" alt="TechnicalGuideToRemote.png" name="heroImg" class="mktoImg fluid g-img mktoImg fluid g-img mktoImg fluid g-img mktoImg fluid g-img" id="heroImg" mktolockimgsize="true" border="0" height="" width="680"></a></td>
+</tr>
+<tr class="mktoModule" id="free_moduled44827f7-b5c1-4a9b-845f-7efef7a3766a">
+<td style="background-color: rgb(255, 255, 255);">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td style="padding: 20px; font-family: 'Barlow',sans-serif; font-size: 14px; line-height: 20px; color: rgb(85, 85, 85);">
+<div class="mktoText" id="freeEmailTextd44827f7-b5c1-4a9b-845f-7efef7a3766a">
+<p style="margin: 0pt 0pt 10px;">While the initial&nbsp;<span style="text-decoration: underline;"><strong><a href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey=">shock</a></strong></span>
+of pandemic-forced work from home may have worn off, your adjustment
+period likely remains under construction. Between new threats needing
+your attention and the intricacy of maintaining smooth operations, your
+SOC team may need some guidance.<br><br><strong><span style="text-decoration: underline;"><a href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey=" target="_blank" class="mktNoTok">A Technical Guide to Remote Security Operations</a></span></strong> helps lay out a blueprint for everything you need to accomplish and plan for. Read this technical guide to learn more about:</p>
+<ul>
+<li>How to keep your security operations thriving in quarantine.</li>
+<li>Which security threats are compounded by mobile working.</li>
+<li>Guidance for secure connectivity and video conferencing.</li>
+<li>Best practices for building new playbooks to address emerging risks.</li>
+<li>How to empower SOC team collaboration, communication and overall well-being.</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="mktoModule" id="button407f0e6f-e892-4326-85d1-419613235c73">
+<td style="padding: 0px 0px 10px; background-color: rgb(255, 255, 255);" align="center">
+<table role="presentation" class="center-on-narrow text-center" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td>
+<table style="border: 1px solid rgb(238, 3, 6);" align="center" bgcolor="#ffffff" border="1" bordercolor="#ee0306" cellpadding="0" cellspacing="0" width="136">
+<tbody>
+<tr>
+<td class="em_white" style="height: 40px; font-family: 'Barlow',sans-serif; font-size: 14px; color: rgb(238, 3, 6);" align="center" height="40" valign="middle"><a class="button-a button-a-primary" href="https://ientry.nui.media/pipeline/638486/0/cc?z=ientry&amp;b=638485&amp;c=638484&amp;session=no&amp;ajkey=" target="_blank" style="text-decoration: none; color: rgb(238, 3, 6); display: block; line-height: 40px;"> <!-- [if mso]> <![endif]--> LEARN MORE <!-- [if mso]> <![endif]--> </a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="mktoModule" id="footer_module7d170b9f-bdbe-4fdf-becc-7b4490ea946b">
+<td style="background-color: rgb(0, 0, 30);">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td style="padding: 20px; font-family: 'Barlow',sans-serif; font-size: 14px; line-height: 20px; color: rgb(255, 255, 255);">
+<table role="presentation" style="float: left;" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td><img class="mktoImg" id="footerLogo7d170b9f-bdbe-4fdf-becc-7b4490ea946b" src="http://pages.siemplify.co/rs/182-SXA-457/images/siemplify-logo.png" alt="siemplify" style="height: auto; font-family: sans-serif; font-size: 14px; line-height: 15px; color: rgb(85, 85, 85);" border="0" height="50" width="200"></td>
+</tr>
+</tbody>
+</table>
+<br><br><br> <br>
+<table role="presentation" style="float: left;" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td><a href="https://www.facebook.com/Siemplify/" style="margin-right: 5px;"> <img class="mktoImg" id="facebookImg7d170b9f-bdbe-4fdf-becc-7b4490ea946b" src="http://pages.siemplify.co/rs/182-SXA-457/images/facebook.png" width="30"> </a> &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/Siemplify" style="margin-right: 5px;"> <img class="mktoImg" id="twitterImg7d170b9f-bdbe-4fdf-becc-7b4490ea946b" src="http://pages.siemplify.co/rs/182-SXA-457/images/twitter.png" width="30"> </a> &nbsp;&nbsp;&nbsp; <a href="https://www.youtube.com/channel/UCM5UwCcey6pSA0z0frZqGsA" style="margin-right: 5px;"> <img class="mktoImg" id="youtubeImg7d170b9f-bdbe-4fdf-becc-7b4490ea946b" src="http://pages.siemplify.co/rs/182-SXA-457/images/youtube.png" width="30"> </a> &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/company/siemplify/" style="margin-right: 5px;"> <img class="mktoImg" id="linkedinImg7d170b9f-bdbe-4fdf-becc-7b4490ea946b" src="http://pages.siemplify.co/rs/182-SXA-457/images/linkedin.png" width="30"> </a></td>
+</tr>
+</tbody>
+</table>
+<br> <br>
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table align="center" border="0" cellpadding="5" cellspacing="5" width="600">
+<tbody>
+<tr>
+<td>
+<div class="stylefooter_footer" align="center"><br> --This email is a service of CyberSecurityUpdate--<br> iEntry, Inc. PO Box 55071 Lexington, KY 40555<br> ©2020 All Rights Reserved<a href="https://digital.adtaxi.com/lp-c1/web-2020-into-focus?utm_medium=thirdparty&amp;utm_source=ientryinc&amp;utm_campaign=webinar&amp;utm_content=2020" target="_blank">.</a> <br> <br> To Be Taken Off This Mailing,&nbsp;<a href="%%unsubscribelink%%">Go here</a></div>
+</td>
+</tr>
+</tbody>
+</table>
+<br> <!-- Email Body : END --> <!-- [if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]--></div>
+<!-- [if mso | IE]>
+    </td>
+    </tr>
+    </table>
+    <![endif]--></center>
+
+</body></html>
